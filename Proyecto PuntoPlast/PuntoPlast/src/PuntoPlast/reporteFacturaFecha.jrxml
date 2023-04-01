@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d428a704-50a8-4c57-8c2f-798d6d861aa3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Fecha1" class="java.lang.String">
+		<defaultValueExpression><![CDATA[2017-01-01]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Fecha2" class="java.lang.String">
+		<defaultValueExpression><![CDATA[2017-03-01]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT Num_fac, CONCAT(Tipo_ci_clie, "-", a.Ci_clie) AS Ci_clie, Nomb_clie, Ape_clie, Total_fac, DATE_FORMAT(Fecha_fac, '%d-%m-%Y')as Fecha_fac, Hora_fac FROM factura a  
+JOIN cliente b ON a.Ci_clie=b.Ci_clie 
+WHERE Fecha_fac>=$P{Fecha1} AND Fecha_fac<=$P{Fecha2} 
+UNION 
+SELECT a.Num_fac AS Num_fac, CONCAT(Tipo_ci_clie, "-", b.Ci_clie) AS Ci_clie, Nomb_clie, Ape_clie, Total_fac, DATE_FORMAT(Fecha_fac, '%d-%m-%Y')as Fecha_fac, Hora_fac FROM factura a 
+JOIN pedido b ON a.Num_fac=b.Num_fac  
+JOIN cliente c ON b.Ci_clie=c.Ci_clie 
+WHERE Fecha_fac>=$P{Fecha1} AND Fecha_fac<=$P{Fecha2} 
+ORDER BY Num_fac]]>
+	</queryString>
+	<field name="Num_fac" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Ci_clie" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nomb_clie" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Ape_clie" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Total_fac" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Fecha_fac" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Hora_fac" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="572" height="72" backcolor="#006699" uuid="1d701e07-8736-49a3-ac7d-9d48a4d88cbe"/>
+				<staticText>
+					<reportElement x="130" y="13" width="314" height="43" forecolor="#FFFFFF" uuid="d76abf45-4300-4440-80c5-99e156b45679"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Listado de facturas]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<staticText>
+				<reportElement mode="Opaque" x="158" y="0" width="177" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b008fd63-876a-451c-a850-28dfa4a4fc20"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre y Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="414" y="0" width="79" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="6746b871-d015-468f-8d0f-c3f04d556600"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="79" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="79b94576-e78d-41e9-ac45-f410ccefd70f"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° Fact.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="335" y="0" width="79" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="94461337-64e8-41f2-9253-2582e00f7db6"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="493" y="0" width="79" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="64d915ce-8980-4b62-b82d-ed5d36e1699c"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="79" y="0" width="79" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="df2f69c1-2a7c-4aab-a4e5-0394ff840524"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cedula]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="335" y="0" width="79" height="20" uuid="d879f8b8-6ef2-4ad2-81a6-f9766d29d6bd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Total_fac}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="79" height="20" uuid="7c5db330-c3fd-4fb4-ae19-7acd2fcbe2a3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Num_fac}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="19" width="572" height="1" forecolor="#666666" uuid="e995f91a-33c7-4015-bbaa-a01cf25d6357"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="158" y="0" width="177" height="20" uuid="85ce7027-d20b-4d79-bedd-06e6381dbeb0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Nomb_clie}+" "+$F{Ape_clie}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="79" y="0" width="79" height="20" uuid="21c5ae00-c2ba-49d8-9068-9b34d4bc99fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Ci_clie}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="572" height="1" uuid="b9555f96-aa96-4874-9d59-d11ce0f07f05"/>
+			</line>
+			<textField isStretchWithOverflow="true" pattern="HH:mm:ss">
+				<reportElement x="493" y="0" width="79" height="20" uuid="c1a833ef-cda8-481d-9119-1e685c05644e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Hora_fac}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="414" y="0" width="79" height="20" uuid="ca4d8bbd-614c-42f3-b94e-ce3ab04b79d9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Fecha_fac}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="532" height="13" backcolor="#E6E6E6" uuid="8ca122bd-8043-489b-917e-457326a08d29"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="532" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="8de6e886-93ec-49ab-9ffa-a1644dc66f10"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="6c930ab5-b247-4f10-9fbf-e41030d739e8"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
